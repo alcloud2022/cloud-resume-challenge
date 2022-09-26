@@ -1,0 +1,45 @@
+  MyWebsite:
+    Type: AWS::S3::Bucket
+    Properties:
+      AccessControl: PublicRead
+      WebsiteConfiguration:
+        IndexDocument: index.html
+      BucketName: al-cloud-resume
+
+  BucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      PolicyDocument:
+        Id: MyPolicy
+        Version: 2012-10-17
+        Statement:
+          - Sid: PublicReadForGetBucketObjects
+            Effect: Allow
+            Principal: "*"
+            Action: "s3:GetObject"
+            Resource: !Join
+              - ""
+              - - "arn:aws:s3:::"
+                - !Ref al-cloud-resume
+                - /*
+      Bucket: !Ref al-cloud-resume
+
+  MyDistibution:
+    Type: "AWS::CloudFront::Distribution"
+    Properties:
+      DistributionConfig:
+        DefaultCacheBehavior:
+          ViewerProtocolPolicy: allow-all
+          TargetOrigunId: https://al-cloud-resume.s3.amazonaws.com/index.html
+          DefaultTTL: 0
+          MinTTL: 0
+          MaxTLL: 0
+          ForwardedValues:
+            QueryString: false 
+        Origins:
+          - DomainName: https://al-cloud-resume.s3.amazonaws.com/index.html
+            Id: https://al-cloud-resume.s3.amazonaws.com/index.html
+            CustomOriginConfig:
+              OriginProtocolPolicy: match-viewer
+        Enabled: "true"
+        DefaultRootObject: index.html        

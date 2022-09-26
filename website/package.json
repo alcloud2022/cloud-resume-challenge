@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "serverless-s3bucket-sync": "^0.1.5"
+  }
+}
