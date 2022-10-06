@@ -29,16 +29,16 @@ Resources:
  #       - AttributeName: "ID"
  #         KeyType: "HASH"    
 
-  MyRoute53Record:
-    Type: "AWS::Route53::RecordSetGroup"
-    Properties:
-      HostedZoneId: Z0677754ZBYHU5RPIFKB # TODO: Don't hardcode me
-      RecordSets:
-        - Name: al-resume.co.uk # TODO: Don't hardcode me
-          Type: A
-          AliasTarget:
-            HostedZoneId: Z2FDTNDATAQYW2
-            DNSName: !GetAtt MyDistribution.DomainName  
+#  MyRoute53Record:
+#    Type: "AWS::Route53::RecordSetGroup"
+#    Properties:
+#      HostedZoneId: Z0677754ZBYHU5RPIFKB # TODO: Don't hardcode me
+#      RecordSets:
+#        - Name: al-resume.co.uk # TODO: Don't hardcode me
+#          Type: A
+#          AliasTarget:
+#            HostedZoneId: Z2FDTNDATAQYW2
+#            DNSName: !GetAtt MyDistribution.DomainName  
 
 #  MyCertificate:
 #    Type: AWS::CertificateManager::Certificate
